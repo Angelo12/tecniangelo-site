@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0c1630" />
+    <title>Descargar QueTasa — iPhone y Android</title>
+    <meta
+      name="description"
+      content="Descarga QueTasa para iPhone o Android. Te enviaremos automáticamente a la tienda correcta para tu dispositivo."
+    />
+    <link rel="canonical" href="https://tecniangelo.com/quetasa/" />
+    <link rel="icon" href="../favicon.png" />
+    <meta property="og:title" content="Descargar QueTasa" />
+    <meta
+      property="og:description"
+      content="Tasas BCV, EUR, USDT y promedio. Disponible para iPhone y Android."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://tecniangelo.com/quetasa/" />
+    <style>
+      :root {
+        color-scheme: dark;
+        --navy-top: #1f3f96;
+        --navy-bot: #0c1630;
+        --gold: #f0b90b;
+        --white: #ffffff;
+        --sub: #c5d1ea;
+        --card: rgba(255, 255, 255, 0.06);
+        --border: rgba(255, 255, 255, 0.14);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        min-height: 100svh;
+        display: grid;
+        place-items: center;
+        padding: 32px 20px;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+          Arial, sans-serif;
+        color: var(--white);
+        background:
+          radial-gradient(circle at 50% 8%, rgba(56, 105, 218, 0.42), transparent 35%),
+          linear-gradient(160deg, var(--navy-top), var(--navy-bot) 72%);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      main {
+        width: min(100%, 520px);
+        text-align: center;
+      }
+
+      .icon {
+        width: 104px;
+        height: 104px;
+        border-radius: 24px;
+        box-shadow: 0 22px 54px rgba(0, 0, 0, 0.34);
+      }
+
+      h1 {
+        margin-top: 24px;
+        font-size: clamp(32px, 8vw, 46px);
+        line-height: 1.08;
+        letter-spacing: -1px;
+      }
+
+      .lead {
+        max-width: 430px;
+        margin: 16px auto 0;
+        color: var(--sub);
+        font-size: 18px;
+        line-height: 1.55;
+      }
+
+      .status {
+        min-height: 28px;
+        margin-top: 22px;
+        color: var(--gold);
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.4px;
+      }
+
+      .stores {
+        display: grid;
+        gap: 14px;
+        margin-top: 22px;
+      }
+
+      .store {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        min-height: 76px;
+        padding: 14px 18px;
+        color: var(--white);
+        text-align: left;
+        text-decoration: none;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        transition:
+          transform 160ms ease,
+          border-color 160ms ease,
+          background 160ms ease;
+      }
+
+      .store:hover,
+      .store:focus-visible {
+        transform: translateY(-2px);
+        border-color: var(--gold);
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .store:focus-visible {
+        outline: 2px solid var(--gold);
+        outline-offset: 3px;
+      }
+
+      .store svg {
+        width: 30px;
+        height: 30px;
+        flex: 0 0 auto;
+        fill: currentColor;
+      }
+
+      .store small {
+        display: block;
+        color: var(--sub);
+        font-size: 13px;
+      }
+
+      .store strong {
+        display: block;
+        margin-top: 1px;
+        font-size: 18px;
+      }
+
+      .note {
+        margin-top: 24px;
+        color: var(--sub);
+        font-size: 13px;
+        line-height: 1.5;
+      }
+
+      .note a {
+        color: var(--white);
+      }
+    </style>
+    <script>
+      (() => {
+        const APP_STORE =
+          "https://apps.apple.com/us/app/quetasa/id6781491111";
+        const PLAY_STORE =
+          "https://play.google.com/store/apps/details?id=com.tecniangelo.quetasa";
+        const parameters = new URLSearchParams(window.location.search);
+
+        if (parameters.get("choose") === "1") return;
+
+        const userAgent = navigator.userAgent || "";
+        const platform =
+          navigator.userAgentData?.platform || navigator.platform || "";
+        const isIPadOS =
+          platform === "MacIntel" && navigator.maxTouchPoints > 1;
+        const isIOS = /iPad|iPhone|iPod/i.test(userAgent) || isIPadOS;
+        const isAndroid =
+          /Android/i.test(userAgent) || /Android/i.test(platform);
+        const destination = isIOS
+          ? APP_STORE
+          : isAndroid
+            ? PLAY_STORE
+            : null;
+
+        if (destination) {
+          document.addEventListener("DOMContentLoaded", () => {
+            const status = document.querySelector("[data-status]");
+            if (status) status.textContent = "Abriendo la tienda correcta…";
+          });
+          window.location.replace(destination);
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <main>
+      <img class="icon" src="../icon.png" alt="" width="104" height="104" />
+      <h1>Descarga QueTasa</h1>
+      <p class="lead">
+        Tasas BCV, EUR, USDT y promedio, con calculadora, listas de precios y
+        recibos de Pago Móvil.
+      </p>
+      <p class="status" data-status>Elige la tienda de tu dispositivo</p>
+
+      <div class="stores">
+        <a
+          class="store"
+          href="https://apps.apple.com/us/app/quetasa/id6781491111"
+          rel="noopener noreferrer"
+          aria-label="Descargar QueTasa en el App Store"
+        >
+          <svg aria-hidden="true" viewBox="0 0 384 512">
+            <path d="M319.1 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7-55.8 .9-115.1 44.5-115.1 133.2 0 26.2 4.8 53.3 14.4 81.2 12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zM262.5 104.5c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z" />
+          </svg>
+          <span>
+            <small>Descargar para iPhone y iPad</small>
+            <strong>App Store</strong>
+          </span>
+        </a>
+
+        <a
+          class="store"
+          href="https://play.google.com/store/apps/details?id=com.tecniangelo.quetasa"
+          rel="noopener noreferrer"
+          aria-label="Descargar QueTasa en Google Play"
+        >
+          <svg aria-hidden="true" viewBox="0 0 448 512">
+            <path d="M293.6 234.3L72.9 13 353.7 174.2 293.6 234.3zM15.3 0C2.3 6.8-6.4 19.2-6.4 35.3l0 441.3c0 16.1 8.7 28.5 21.7 35.3L271.9 255.9 15.3 0zM440.5 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c18-14.3 18-46.5-1.2-60.8zM72.9 499L353.7 337.8 293.6 277.7 72.9 499z" />
+          </svg>
+          <span>
+            <small>Descargar para Android</small>
+            <strong>Google Play</strong>
+          </span>
+        </a>
+      </div>
+
+      <noscript>
+        <p class="note">
+          JavaScript está desactivado. Usa uno de los botones de tienda.
+        </p>
+      </noscript>
+
+      <p class="note">
+        QueTasa es una aplicación de Tecni Angelo LLC.
+        <a href="/quetasa/privacy/">Privacidad</a>
+      </p>
+    </main>
+  </body>
+</html>
