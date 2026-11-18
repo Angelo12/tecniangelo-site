@@ -247,6 +247,16 @@
           </article>
 
           <article class="card">
+            <div class="meta"><span class="role">Feature owner</span><span>2026</span></div>
+            <h3>First Time Experience Update</h3>
+            <p>The new-player path that shipped in September 2026. I built First Ride, a guided two-song campaign with its own celebration and completion screens; the hover hints on the main menu and song selection, which step back as you play more; and the staged tour that introduces the song selection screen on a first visit.</p>
+            <div class="chips"><span class="chip">Unity</span><span class="chip">C#</span><span class="chip">DOTween</span><span class="chip">Localization</span></div>
+            <div class="links">
+              <a href="https://steamcommunity.com/ogg/885000/announcements/detail/694271923972997315" target="_blank" rel="noopener noreferrer">Release notes on Steam</a>
+            </div>
+          </article>
+
+          <article class="card">
             <div class="meta"><span class="role">Core architecture and spatial UI</span><span>2023 – 2024</span></div>
             <h3>Apple Vision Pro version</h3>
             <p>I stripped the production game back to a clean, reusable core, which became the base of the visionOS version. On top of it I built the spatial song selection, the onboarding screens and the party mode name entry.</p>
@@ -273,11 +283,11 @@
           <article class="card">
             <div class="meta"><span class="role">Feature owner</span><span>2026</span></div>
             <h3>Unannounced features</h3>
-            <p>In 2026 I took several player-facing features from Figma mock through server API to designer playtest. They are not announced, so the details stay with the studio. The engineering covered new data models, editor-style interfaces with live preview, procedural shaders, and an offline-first sync client with the server API behind it.</p>
+            <p>Beyond that update, I took several more player-facing features from Figma mock through server API to designer playtest in 2026. They are not announced, so the details stay with the studio. The engineering covered new data models, editor-style interfaces with live preview, procedural shaders, and an offline-first sync client with the server API behind it.</p>
             <div class="chips"><span class="chip">Unity</span><span class="chip">C#</span><span class="chip">TypeScript / Node</span><span class="chip">SQL</span></div>
           </article>
 
-          <article class="card">
+          <article class="card wide">
             <div class="meta"><span class="role">Engineering</span><span>2026</span></div>
             <h3>Performance</h3>
             <p>I removed per-frame memory allocations from gameplay hot paths and cut a set of interface fonts from 30 MB to 10.5 MB. I also tracked down what was slowing the editor: material reimport churn, and a settings file that an engine package kept re-saving.</p>
