@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0c1630" />
+  <title>Angelo Gómez — Game and software developer</title>
+  <meta name="description" content="Portfolio of Angelo Gómez: senior game and software developer. Unity and C# for VR and console, TypeScript for web and mobile. Five years on Synth Riders; founder of QueApps." />
+  <link rel="canonical" href="https://tecniangelo.com/portfolio/" />
+  <link rel="icon" href="../favicon.png" />
+  <meta property="og:title" content="Angelo Gómez — Game and software developer" />
+  <meta property="og:description" content="Game systems and apps, built end to end. Unity and C# for VR and console, TypeScript for web and mobile." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://tecniangelo.com/portfolio/" />
+  <style>
+    :root {
+      --navy-top: #1f3f96;
+      --navy-bot: #0c1630;
+      --gold: #f0b90b;
+      --white: #ffffff;
+      --sub: #c5d1ea;
+      --dim: #8fa3cf;
+      --card: rgba(255, 255, 255, 0.05);
+      --card-strong: rgba(255, 255, 255, 0.08);
+      --border: rgba(255, 255, 255, 0.12);
+      --live: #3ddc97;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--navy-bot);
+      color: var(--white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    a:focus-visible, .btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 6px; }
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+    h1, h2, h3 { text-wrap: balance; }
+
+    /* Header */
+    header {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(12, 22, 48, 0.85);
+      backdrop-filter: saturate(180%) blur(12px);
+      -webkit-backdrop-filter: saturate(180%) blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 68px; }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 18px; letter-spacing: -0.2px; white-space: nowrap; }
+    .brand .mono {
+      width: 34px; height: 34px; border-radius: 9px; flex: 0 0 auto;
+      display: grid; place-items: center;
+      background: var(--gold); color: #10151b;
+      font-size: 14px; font-weight: 800; letter-spacing: -0.3px;
+    }
+    .nav-links { display: flex; align-items: center; gap: 26px; font-size: 15px; color: var(--sub); }
+    .nav-links a:hover { color: var(--white); }
+    .nav-links .nav-cta { color: var(--gold); font-weight: 700; }
+    @media (max-width: 700px) { .nav-links a:not(.nav-cta) { display: none; } }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(160deg, var(--navy-top) 0%, var(--navy-bot) 70%);
+      padding: 80px 0 68px;
+    }
+    .hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 48px; align-items: center; }
+    @media (max-width: 860px) { .hero-grid { grid-template-columns: 1fr; gap: 36px; } }
+    .eyebrow { color: var(--gold); font-weight: 700; font-size: 14px; letter-spacing: 1.5px; text-transform: uppercase; }
+    .hero h1 { font-size: clamp(34px, 5vw, 52px); line-height: 1.1; letter-spacing: -1px; margin: 16px 0 0; }
+    .divider { width: 88px; height: 5px; background: var(--gold); border-radius: 3px; margin: 24px 0; }
+    .hero p { font-size: 18px; color: var(--sub); max-width: 560px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .btn {
+      display: inline-block; background: var(--gold); color: #10151b;
+      font-weight: 700; padding: 13px 24px; border-radius: 12px; white-space: nowrap;
+    }
+    .btn:hover { filter: brightness(1.06); }
+    .btn.secondary { background: transparent; color: var(--white); border: 1px solid var(--border); }
+    .btn.secondary:hover { border-color: var(--gold); filter: none; }
+    .avail { display: flex; align-items: center; gap: 10px; margin-top: 22px; font-size: 14.5px; color: var(--sub); }
+    .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--live); flex: 0 0 auto; box-shadow: 0 0 0 4px rgba(61, 220, 151, 0.18); }
+
+    .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .stat { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; }
+    .stat b { display: block; font-size: clamp(22px, 2.5vw, 28px); line-height: 1.1; letter-spacing: -0.6px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .stat span { display: block; margin-top: 8px; color: var(--sub); font-size: 14px; line-height: 1.45; }
+    @media (max-width: 420px) { .stats { grid-template-columns: 1fr; } }
+
+    /* Sections */
+    section { padding: 72px 0; }
+    section + section { padding-top: 8px; }
+    .section-title { font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 10px; }
+    h2 { font-size: clamp(26px, 3.5vw, 36px); line-height: 1.2; letter-spacing: -0.6px; margin-bottom: 14px; }
+    .lead { color: var(--sub); font-size: 18px; max-width: 680px; }
+
+    /* Work cards */
+    .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 40px; }
+    @media (max-width: 800px) { .cards { grid-template-columns: 1fr; } }
+    .card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 26px;
+      display: flex; flex-direction: column;
+    }
+    .card.wide { grid-column: 1 / -1; }
+    .meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; font-size: 13px; color: var(--dim); margin-bottom: 12px; }
+    .role { color: var(--gold); font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; font-size: 12px; }
+    .card h3 { font-size: 20px; line-height: 1.25; letter-spacing: -0.2px; margin-bottom: 8px; }
+    .card p { color: var(--sub); font-size: 15.5px; }
+    .card p + p { margin-top: 10px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .chip { font-size: 12.5px; color: var(--sub); border: 1px solid var(--border); border-radius: 999px; padding: 4px 11px; white-space: nowrap; }
+    .links { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: auto; padding-top: 18px; font-size: 14.5px; font-weight: 700; }
+    .links a { color: var(--white); border-bottom: 2px solid var(--gold); padding-bottom: 1px; }
+    .links a:hover { color: var(--gold); }
+    .links a::after { content: " \2197"; font-weight: 400; }
+
+    .status { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; }
+    .status::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+    .status.live { color: var(--live); }
+    .status.soon { color: var(--gold); }
+    .status.dev { color: var(--dim); }
+
+    /* Featured app */
+    .feature-app { display: grid; grid-template-columns: 1fr auto; gap: 36px; align-items: center; }
+    .feature-app .body { display: flex; flex-direction: column; }
+    .phone {
+      width: 200px; border-radius: 28px; padding: 8px;
+      background: rgba(8, 16, 34, 0.5); border: 1px solid var(--border);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+    }
+    .phone img { width: 100%; border-radius: 21px; display: block; }
+    @media (max-width: 700px) {
+      .feature-app { grid-template-columns: 1fr; }
+      .phone { margin: 0 auto; }
+    }
+
+    /* How I work */
+    .callout {
+      background: var(--card); border: 1px solid var(--border);
+      border-left: 4px solid var(--gold);
+      border-radius: 20px; padding: 36px 40px;
+    }
+    .callout p { color: var(--sub); font-size: 17px; max-width: 760px; }
+    .callout p + p { margin-top: 12px; }
+    @media (max-width: 620px) { .callout { padding: 28px 24px; } }
+
+    /* Earlier */
+    .timeline { margin-top: 32px; border-top: 1px solid var(--border); }
+    .row { display: grid; grid-template-columns: 130px 1fr; gap: 20px; padding: 18px 0; border-bottom: 1px solid var(--border); }
+    .row .when { color: var(--dim); font-size: 14px; font-variant-numeric: tabular-nums; padding-top: 2px; }
+    .row b { display: block; font-size: 16.5px; }
+    .row span { color: var(--sub); font-size: 15px; }
+    @media (max-width: 560px) { .row { grid-template-columns: 1fr; gap: 4px; } }
+
+    /* Skills */
+    .skills { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 36px; }
+    @media (max-width: 760px) { .skills { grid-template-columns: 1fr; } }
+    .skill-group { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 22px 24px; }
+    .skill-group h3 { font-size: 15px; letter-spacing: 0.2px; margin-bottom: 2px; }
+    .skill-group .chips { margin-top: 12px; }
+
+    /* Contact */
+    .contact {
+      background: linear-gradient(160deg, rgba(31, 63, 150, 0.55) 0%, var(--card) 80%);
+      border: 1px solid var(--border); border-radius: 20px; padding: 44px 40px;
+      display: grid; grid-template-columns: 1fr auto; gap: 28px; align-items: center;
+    }
+    .contact .actions { margin-top: 0; }
+    @media (max-width: 760px) { .contact { grid-template-columns: 1fr; padding: 32px 24px; } }
+
+    /* Footer */
+    footer { border-top: 1px solid var(--border); padding: 40px 0 48px; color: var(--sub); font-size: 14px; margin-top: 72px; }
+    .foot-grid { display: flex; justify-content: space-between; gap: 20px 32px; flex-wrap: wrap; }
+    .foot-links { display: flex; gap: 24px; flex-wrap: wrap; }
+    .foot-links a:hover { color: var(--white); }
+    .fine { margin-top: 22px; opacity: 0.65; max-width: 760px; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <a href="#top" class="brand"><span class="mono" aria-hidden="true">AG</span>Angelo Gómez</a>
+      <nav class="nav-links" aria-label="Sections">
+        <a href="#games">Games</a>
+        <a href="#ai">AI workflow</a>
+        <a href="#studio">Studio</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact" class="nav-cta">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow">Portfolio</div>
+          <h1>Game systems and apps, built end to end.</h1>
+          <div class="divider"></div>
+          <p>I'm a senior game and software developer. I work in Unity and C# for VR and console games, and in TypeScript for web and mobile. I spent the last five years on Synth Riders at Kluge Interactive, and I run a small app studio, QueApps.</p>
+          <div class="actions">
+            <a class="btn" href="#games">See the work</a>
+            <a class="btn secondary" href="https://www.linkedin.com/in/angelogomez/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          </div>
+          <div class="avail"><span class="dot" aria-hidden="true"></span>Available from December 2026 · Remote · Eligible to work in the EU</div>
+        </div>
+        <div class="stats">
+          <div class="stat"><b>10 years</b><span>shipping games, apps and web software</span></div>
+          <div class="stat"><b>5 platforms</b><span>Meta Quest, PC VR, PlayStation VR2, Nintendo Switch, Apple Vision Pro</span></div>
+          <div class="stat"><b>93</b><span>achievements in the progression system I designed and built</span></div>
+          <div class="stat"><b>2 stores</b><span>my own app, QueTasa, is live on the App Store and Google Play</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Games -->
+    <section id="games">
+      <div class="wrap">
+        <div class="section-title">Games</div>
+        <h2>Synth Riders at Kluge Interactive</h2>
+        <p class="lead">VR Unity Developer, January 2022 to November 2026. I built flagship systems from scratch, took the game to new platforms, and owned features from the design mock to the playtest.</p>
+
+        <div class="cards">
+          <article class="card wide">
+            <div class="meta"><span class="role">Primary developer</span><span>2025 – 2026</span></div>
+            <h3>The Progression System</h3>
+            <p>Levels and XP, 93 achievements, daily and weekly missions with a claim flow, and the full in-game interface. The server is authoritative: I defined the contract between client and server and built the entire client, including an encrypted local cache and sign-in through Steam and Meta.</p>
+            <p>It shipped in March 2026 as the Level UP update, which the studio called its largest feature update to date.</p>
+            <div class="chips"><span class="chip">Unity</span><span class="chip">C#</span><span class="chip">REST API</span><span class="chip">Steam and Meta sign-in</span><span class="chip">Quest · PC VR · PSVR2</span></div>
+            <div class="links">
+              <a href="https://www.uploadvr.com/synth-riders-levels-up-with-new-progression-system/" target="_blank" rel="noopener noreferrer">UploadVR coverage</a>
+              <a href="https://synthridersvr.com/2026/03/" target="_blank" rel="noopener noreferrer">Studio announcement</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="meta"><span class="role">Owner of three systems</span><span>2025</span></div>
+            <h3>Synth Riders for Nintendo Switch</h3>
+            <p>A standalone flatscreen game, released in December 2025. On a team of more than fifteen I built character customization (three characters, addressable assets, editor tooling, save and load), the cutscene and dialogue engine, and the procedural campaign map.</p>
+            <div class="chips"><span class="chip">Unity</span><span class="chip">C#</span><span class="chip">Addressables</span><span class="chip">Nintendo Switch</span></div>
+            <div class="links">
+              <a href="https://www.gematsu.com/2025/10/synth-riders-overdrive-announced-for-switch" target="_blank" rel="noopener noreferrer">Announcement on Gematsu</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="meta"><span class="role">Core architecture and spatial UI</span><span>2023 – 2024</span></div>
+            <h3>Apple Vision Pro version</h3>
+            <p>I stripped the production game back to a clean, reusable core, which became the base of the visionOS version. On top of it I built the spatial song selection, the onboarding screens and the party mode name entry.</p>
+            <div class="chips"><span class="chip">Unity PolySpatial</span><span class="chip">visionOS</span><span class="chip">C#</span></div>
+          </article>
+
+          <article class="card">
+            <div class="meta"><span class="role">UI engineering</span><span>2023 – 2024</span></div>
+            <h3>Interface overhaul and reusable UI</h3>
+            <p>For the game's 2024 interface overhaul I built a recycling list whose cost stays constant however long the list gets. The song list and other menus now run on it. I also built the new score screens, and earlier a replacement tooltip system with localization in seven languages.</p>
+            <div class="chips"><span class="chip">Unity UI</span><span class="chip">C#</span><span class="chip">Localization</span></div>
+            <div class="links">
+              <a href="https://uploadvr.com/synth-riders-overhauls-user-interface-in-latest-update" target="_blank" rel="noopener noreferrer">UploadVR on the new interface</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="meta"><span class="role">Solo developer</span><span>2022</span></div>
+            <h3>Arcade edition</h3>
+            <p>I rebuilt the full game into a timed arcade flow for VRsenal cabinets: a new game loop, song selection on a timer, and a conversion to the Universal Render Pipeline.</p>
+            <div class="chips"><span class="chip">Unity</span><span class="chip">URP</span><span class="chip">Arcade</span></div>
+          </article>
+
+          <article class="card">
+            <div class="meta"><span class="role">Feature owner</span><span>2026</span></div>
+            <h3>Unannounced features</h3>
+            <p>In 2026 I took several player-facing features from Figma mock through server API to designer playtest. They are not announced, so the details stay with the studio. The engineering covered new data models, editor-style interfaces with live preview, procedural shaders, and an offline-first sync client with the server API behind it.</p>
+            <div class="chips"><span class="chip">Unity</span><span class="chip">C#</span><span class="chip">TypeScript / Node</span><span class="chip">SQL</span></div>
+          </article>
+
+          <article class="card">
+            <div class="meta"><span class="role">Engineering</span><span>2026</span></div>
+            <h3>Performance</h3>
+            <p>I removed per-frame memory allocations from gameplay hot paths and cut a set of interface fonts from 30 MB to 10.5 MB. I also tracked down what was slowing the editor: material reimport churn, and a settings file that an engine package kept re-saving.</p>
+            <div class="chips"><span class="chip">Profiling</span><span class="chip">GC optimization</span><span class="chip">Editor diagnostics</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- AI workflow -->
+    <section id="ai">
+      <div class="wrap">
+        <div class="callout">
+          <div class="section-title">A newer skill</div>
+          <h2>AI coding agents, adopted in 2025 and put to work</h2>
+          <p>Most of the work on this page predates AI coding agents: the arcade edition, the Vision Pro core, the interface overhaul and the Switch systems. I started using agents in late 2025, partway through building the progression system, and have spent the year since getting good at it.</p>
+          <p>I work with them in a disciplined way. I write the spec and the plan, direct the agents, review what they produce, and check the result myself in the editor and in the headset. Core logic gets its tests first, and a feature ends with tests that pin its behaviour. Building on automation tools my teammates had set up, I wrote the project's playbook for driving the editor with agents, added new scenarios to the menu-navigation test harness, and built my own verification probes and a test runner that works with the editor closed.</p>
+          <p>In 2026 that meant about twice the output of the year before, including features I owned from the database to the last polish pass on the interface.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Studio -->
+    <section id="studio">
+      <div class="wrap">
+        <div class="section-title">Studio</div>
+        <h2>QueApps, by Tecni Angelo LLC</h2>
+        <p class="lead">My own studio. Small, useful products for Venezuela and Latin America, designed, built and shipped by me.</p>
+
+        <div class="cards">
+          <article class="card wide">
+            <div class="feature-app">
+              <div class="body">
+                <div class="meta"><span class="status live">Live</span><span>iOS and Android</span></div>
+                <h3>QueTasa</h3>
+                <p>Venezuela's exchange rates on one screen: official and market rates, a currency calculator, price lists that follow the rate, and payment receipts. It is live on the App Store and Google Play, with push alerts when a new rate is published, a one-time premium purchase and ads.</p>
+                <div class="chips"><span class="chip">React Native (Expo)</span><span class="chip">TypeScript</span><span class="chip">Supabase</span><span class="chip">RevenueCat</span><span class="chip">AdMob</span></div>
+                <div class="links">
+                  <a href="https://apps.apple.com/us/app/quetasa/id6781491111" target="_blank" rel="noopener noreferrer">App Store</a>
+                  <a href="https://play.google.com/store/apps/details?id=com.tecniangelo.quetasa" target="_blank" rel="noopener noreferrer">Google Play</a>
+                </div>
+              </div>
+              <div class="phone"><img src="../quetasa-home.png" alt="QueTasa home screen showing today's exchange rates" loading="lazy" /></div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="meta"><span class="status live">Live</span><span>Client work</span></div>
+            <h3>Booth Experience</h3>
+            <p>Marketing and reservation site for a photo booth rental business in Santo Domingo: packages, a gallery of real events, a date availability check, reservation requests and an admin panel for the owner.</p>
+            <div class="chips"><span class="chip">Next.js</span><span class="chip">TypeScript</span><span class="chip">Supabase</span><span class="chip">Netlify</span></div>
+            <div class="links">
+              <a href="https://boothexperience.netlify.app" target="_blank" rel="noopener noreferrer">Visit the site</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="meta"><span class="status live">Live</span><span>2026 World Cup</span></div>
+            <h3>Quiniela Mundial VE</h3>
+            <p>A World Cup prediction league. Create a private pool with friends and score points for exact results, correct winners and who advances in the knockout rounds, with live match data.</p>
+            <div class="chips"><span class="chip">Next.js</span><span class="chip">TypeScript</span><span class="chip">Sports data API</span></div>
+            <div class="links">
+              <a href="https://quinielamundialve.xyz" target="_blank" rel="noopener noreferrer">Visit the site</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="meta"><span class="status soon">Ready to launch</span><span>Web app</span></div>
+            <h3>QueSello</h3>
+            <p>Digital stamp cards for restaurants. Customers keep the card in Apple Wallet or Google Wallet, cashiers scan it at the till, and owners get a guided setup and a view of their regulars. It is multi-tenant, with the business rules written as database functions and tested against the real migrations.</p>
+            <div class="chips"><span class="chip">TypeScript</span><span class="chip">Supabase (Postgres)</span><span class="chip">Apple Wallet</span><span class="chip">Google Wallet</span></div>
+          </article>
+
+          <article class="card">
+            <div class="meta"><span class="status dev">In development</span><span>Game</span></div>
+            <h3>Altezia</h3>
+            <p>An online RPG prototype in the spirit of the 2000s grinders. An authoritative C# server and a Godot client, with combat, skills, quests, parties and mounts, plus scripted test runs and network lag simulation.</p>
+            <div class="chips"><span class="chip">C# / .NET</span><span class="chip">Godot 4</span><span class="chip">Client–server</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Earlier -->
+    <section id="earlier">
+      <div class="wrap">
+        <div class="section-title">Before that</div>
+        <h2>Earlier work</h2>
+        <div class="timeline">
+          <div class="row"><div class="when">2020</div><div><b>Octametro</b><span>A multiplayer server written from scratch in C# (TCP and UDP) for a virtual expo, with accounts, messaging, voice chat and crash recovery, plus most of its Unity client.</span></div></div>
+          <div class="row"><div class="when">2020</div><div><b>Spatium Group</b><span>A Node.js self-service web app for coworking members and two course-sales sites.</span></div></div>
+          <div class="row"><div class="when">2017</div><div><b>Gavinci Gaming</b><span>Casino games in GameMaker Studio 2 and Godot, coordinating a team of three developers.</span></div></div>
+          <div class="row"><div class="when">2016 – 2017</div><div><b>Fourmation App Development</b><span>The entire iOS version of a published App Store app, in Swift.</span></div></div>
+          <div class="row"><div class="when">2012 – 2016</div><div><b>Full Sail University</b><span>B.S. in Game Development and B.S. in Mobile Development. Graduated Salutatorian.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills">
+      <div class="wrap">
+        <div class="section-title">Skills</div>
+        <h2>What I work with</h2>
+        <div class="skills">
+          <div class="skill-group">
+            <h3>Engines and XR</h3>
+            <div class="chips"><span class="chip">Unity 6</span><span class="chip">OpenXR</span><span class="chip">XR Interaction Toolkit</span><span class="chip">URP and custom shaders</span><span class="chip">Meta Quest</span><span class="chip">PSVR2</span><span class="chip">visionOS</span><span class="chip">Android XR</span><span class="chip">Godot 4</span></div>
+          </div>
+          <div class="skill-group">
+            <h3>Languages</h3>
+            <div class="chips"><span class="chip">C#</span><span class="chip">TypeScript</span><span class="chip">JavaScript</span><span class="chip">Swift</span><span class="chip">Python</span><span class="chip">SQL</span><span class="chip">English and Spanish</span></div>
+          </div>
+          <div class="skill-group">
+            <h3>Backend and networking</h3>
+            <div class="chips"><span class="chip">Node.js REST APIs</span><span class="chip">Postgres</span><span class="chip">Supabase</span><span class="chip">Photon PUN 2 and Fusion</span><span class="chip">Custom C# servers</span><span class="chip">PlayFab</span></div>
+          </div>
+          <div class="skill-group">
+            <h3>Web, mobile and practice</h3>
+            <div class="chips"><span class="chip">React Native</span><span class="chip">Next.js</span><span class="chip">React</span><span class="chip">Automated testing</span><span class="chip">Performance and GC optimization</span><span class="chip">Editor tooling</span><span class="chip">AI-assisted development</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <div class="wrap">
+        <div class="contact">
+          <div>
+            <div class="section-title">Contact</div>
+            <h2 style="margin-bottom:8px;">Looking for my next team</h2>
+            <p class="lead">Flatscreen or VR game development, or web and mobile work. I'm remote from Venezuela and, as an Italian citizen, can work in the EU without sponsorship.</p>
+          </div>
+          <div class="actions">
+            <a class="btn" href="mailto:tecniangelollc@gmail.com?subject=Hello%20Angelo">Email me</a>
+            <a class="btn secondary" href="https://www.linkedin.com/in/angelogomez/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap foot-grid">
+      <div>© 2026 Angelo Gómez · Tecni Angelo LLC</div>
+      <div class="foot-links">
+        <a href="../">Tecni Angelo LLC</a>
+        <a href="../#quetasa">QueTasa</a>
+        <a href="https://www.linkedin.com/in/angelogomez/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      </div>
+    </div>
+    <div class="wrap fine">Synth Riders is a trademark of Kluge Interactive. Studio work is described here from publicly announced releases; unannounced work is described without product details.</div>
+  </footer>
+</body>
+</html>
