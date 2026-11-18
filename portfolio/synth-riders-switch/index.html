@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0c1630" />
+  <title>Synth Riders for Nintendo Switch — case study · Angelo Gómez</title>
+  <meta name="description" content="Case study: the character customization system, cutscene and dialogue engine, and campaign that Angelo Gómez built for Synth Riders on Nintendo Switch." />
+  <link rel="canonical" href="https://tecniangelo.com/portfolio/synth-riders-switch/" />
+  <link rel="icon" href="../../favicon.png" />
+  <meta property="og:title" content="Synth Riders for Nintendo Switch — case study" />
+  <meta property="og:description" content="Three systems on a standalone flatscreen game: character customization, the cutscene and dialogue engine, and the campaign." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://tecniangelo.com/portfolio/synth-riders-switch/" />
+  <style>
+    :root {
+      --navy-top: #1f3f96;
+      --navy-bot: #0c1630;
+      --gold: #f0b90b;
+      --white: #ffffff;
+      --sub: #c5d1ea;
+      --dim: #8fa3cf;
+      --card: rgba(255, 255, 255, 0.05);
+      --border: rgba(255, 255, 255, 0.12);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--navy-bot);
+      color: var(--white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 6px; }
+    .wrap { max-width: 940px; margin: 0 auto; padding: 0 24px; }
+    h1, h2, h3 { text-wrap: balance; }
+
+    header {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(12, 22, 48, 0.85);
+      backdrop-filter: saturate(180%) blur(12px);
+      -webkit-backdrop-filter: saturate(180%) blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 68px; max-width: 1040px; }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 18px; letter-spacing: -0.2px; white-space: nowrap; }
+    .brand .mono {
+      width: 34px; height: 34px; border-radius: 9px; flex: 0 0 auto;
+      display: grid; place-items: center;
+      background: var(--gold); color: #10151b;
+      font-size: 14px; font-weight: 800; letter-spacing: -0.3px;
+    }
+    .nav-links { display: flex; align-items: center; gap: 24px; font-size: 15px; color: var(--sub); }
+    .nav-links a:hover { color: var(--white); }
+    .nav-links .nav-cta { color: var(--gold); font-weight: 700; white-space: nowrap; }
+    @media (max-width: 760px) { .nav-links a:not(.nav-cta) { display: none; } }
+
+    .hero { background: linear-gradient(160deg, var(--navy-top) 0%, var(--navy-bot) 75%); padding: 72px 0 56px; }
+    .eyebrow { color: var(--gold); font-weight: 700; font-size: 14px; letter-spacing: 1.5px; text-transform: uppercase; }
+    .hero h1 { font-size: clamp(32px, 5vw, 48px); line-height: 1.1; letter-spacing: -1px; margin: 14px 0 0; }
+    .divider { width: 88px; height: 5px; background: var(--gold); border-radius: 3px; margin: 22px 0; }
+    .hero p { font-size: 18px; color: var(--sub); max-width: 680px; }
+
+    .facts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 36px; }
+    @media (max-width: 760px) { .facts { grid-template-columns: repeat(2, 1fr); } }
+    .fact { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 16px 18px; }
+    .fact dt { font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: var(--dim); font-weight: 700; }
+    .fact dd { margin-top: 4px; font-size: 15.5px; line-height: 1.4; }
+
+    section { padding: 64px 0 0; }
+    .section-title { font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 10px; }
+    h2 { font-size: clamp(25px, 3.4vw, 34px); line-height: 1.2; letter-spacing: -0.6px; margin-bottom: 14px; }
+    .lead { color: var(--sub); font-size: 17.5px; max-width: 720px; }
+
+    .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 28px; }
+    @media (max-width: 760px) { .cols { grid-template-columns: 1fr; } }
+    .panel { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px 26px; }
+    .panel.wide { grid-column: 1 / -1; }
+    .panel h3 { font-size: 13px; letter-spacing: 1px; text-transform: uppercase; color: var(--dim); margin-bottom: 12px; }
+    .panel p { color: var(--sub); font-size: 15.5px; }
+    .panel ul { list-style: none; display: grid; gap: 12px; }
+    .panel li { color: var(--sub); font-size: 15.5px; padding-left: 20px; position: relative; }
+    .panel li::before { content: ""; position: absolute; left: 0; top: 0.62em; width: 8px; height: 8px; border-radius: 2px; background: var(--gold); }
+    .panel li b { color: var(--white); font-weight: 600; }
+
+    .video { margin-top: 20px; aspect-ratio: 16 / 9; border-radius: 16px; overflow: hidden; border: 1px solid var(--border); background: #060b18; }
+    .video iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+    .timeline { margin-top: 28px; border-top: 1px solid var(--border); }
+    .row { display: grid; grid-template-columns: 150px 1fr; gap: 20px; padding: 16px 0; border-bottom: 1px solid var(--border); }
+    .row .when { color: var(--dim); font-size: 14px; font-variant-numeric: tabular-nums; padding-top: 2px; }
+    .row span { color: var(--sub); font-size: 15.5px; }
+    @media (max-width: 560px) { .row { grid-template-columns: 1fr; gap: 2px; } }
+
+    .back { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 44px; }
+    .btn { display: inline-block; background: var(--gold); color: #10151b; font-weight: 700; padding: 13px 24px; border-radius: 12px; white-space: nowrap; }
+    .btn:hover { filter: brightness(1.06); }
+    .btn.secondary { background: transparent; color: var(--white); border: 1px solid var(--border); }
+    .btn.secondary:hover { border-color: var(--gold); filter: none; }
+
+    footer { border-top: 1px solid var(--border); padding: 36px 0 44px; color: var(--sub); font-size: 14px; margin-top: 72px; }
+    .fine { margin-top: 14px; opacity: 0.65; max-width: 760px; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <a href="../" class="brand"><span class="mono" aria-hidden="true">AG</span>Angelo Gómez</a>
+      <nav class="nav-links" aria-label="Sections">
+        <a href="#customization">Customization</a>
+        <a href="#cutscenes">Cutscenes</a>
+        <a href="#campaign">Campaign</a>
+        <a href="../" class="nav-cta">← Portfolio</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero">
+      <div class="wrap">
+        <div class="eyebrow">Case study</div>
+        <h1>Synth Riders for Nintendo Switch</h1>
+        <div class="divider"></div>
+        <p>A standalone flatscreen game built around a story campaign, released in December 2025. On a team of more than fifteen I owned three of its systems: character customization, the cutscene and dialogue engine, and the campaign.</p>
+        <dl class="facts">
+          <div class="fact"><dt>My role</dt><dd>Owner of three systems</dd></div>
+          <div class="fact"><dt>My part</dt><dd>April to October 2025, 231 commits</dd></div>
+          <div class="fact"><dt>Stack</dt><dd>Unity, C#, Addressables</dd></div>
+          <div class="fact"><dt>Released</dt><dd>December 2025</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <!-- Customization -->
+    <section id="customization">
+      <div class="wrap">
+        <div class="section-title">System one</div>
+        <h2>Character customization</h2>
+        <p class="lead">Three riders to choose from, each with a wardrobe. Items are browsed by slot, bought with currency earned in play or unlocked through the campaign, previewed on the 3D model and kept between sessions, all with the controller.</p>
+        <div class="video" data-video="customization" data-title="Character customization in Synth Riders for Nintendo Switch"></div>
+        <div class="cols">
+          <div class="panel">
+            <h3>How it works</h3>
+            <ul>
+              <li><b>Items are data.</b> Each one records the slot it fills, the set it belongs to, how it unlocks and where it sorts. Its art loads on demand through Addressables.</li>
+              <li><b>Saved per rider</b> through the game's standard save path, so loadouts work on console.</li>
+              <li><b>Controller-first interface.</b> Tabs per slot, lists that scroll to follow the cursor, and price, lock and new markers on each item.</li>
+              <li><b>An editor tool</b> builds new items, so adding content needs no code.</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>The hard parts</h3>
+            <ul>
+              <li><b>Swapping parts on a live skeleton.</b> Changing legs or a head means binding a new skinned mesh to a skeleton that is already animating. The system keeps the bones on a hidden reference mesh and reassigns them to each part as it is created. The same path handles rigid accessories.</li>
+              <li><b>Characters froze after a swap.</b> The animator stopped updating when new meshes appeared. Changing how it culls animation fixed it.</li>
+              <li><b>After launch,</b> a fix that re-syncs campaign unlocks with the player's collection.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cutscenes -->
+    <section id="cutscenes">
+      <div class="wrap">
+        <div class="section-title">System two</div>
+        <h2>Cutscene and dialogue engine</h2>
+        <p class="lead">The story between songs: animatics with dialogue, music and sound, from the opening of the campaign to its ending. Lines advance with a button, and any scene can be skipped.</p>
+        <div class="video" data-video="cutscenes" data-title="A cutscene in Synth Riders for Nintendo Switch"></div>
+        <div class="cols">
+          <div class="panel">
+            <h3>How it works</h3>
+            <ul>
+              <li><b>A timeline of events.</b> Each event can show a video or a still image, play dialogue lines with a speaker name and colour, start or change music, trigger sound effects, and fade in or out.</li>
+              <li><b>Authored in the editor.</b> A creation tool turns a new scene into data, not code.</li>
+              <li><b>Music that carries.</b> A track can start on one event and continue through the next ones, with crossfades between tracks.</li>
+              <li><b>Localized dialogue,</b> with the dialogue box placed per line.</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>The hard parts</h3>
+            <ul>
+              <li><b>Smooth playback on the console.</b> Early versions flickered and dropped frames between events. Loading videos on demand, pooling render textures and capping the frame rate during playback removed both.</li>
+              <li><b>Safe skipping.</b> Mashing the skip button used to lock a scene. Skipping now works at any point, including events with no dialogue.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Campaign -->
+    <section id="campaign">
+      <div class="wrap">
+        <div class="section-title">System three</div>
+        <h2>Campaign</h2>
+        <p class="lead">A map of the story. Each node is a story beat, a song, or both. Clearing nodes opens new ones along branching paths, and milestones award new items for the riders.</p>
+        <div class="video" data-video="campaign" data-title="The campaign map in Synth Riders for Nintendo Switch"></div>
+        <div class="cols">
+          <div class="panel">
+            <h3>How it works</h3>
+            <ul>
+              <li><b>A map laid out from data.</b> Node positions for each branch are generated and the paths between them are drawn automatically, including several paths out of one node.</li>
+              <li><b>Flexible nodes.</b> A node can launch a cutscene, a song, or a cutscene followed by a song.</li>
+              <li><b>Progress.</b> Unlocking, cleared markers, a difficulty choice that persists between scenes, and the ending scene after the last node.</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>Where the systems meet</h3>
+            <ul>
+              <li><b>Rewards.</b> Milestones award one or several items through the customization system, with an unlock screen that has its own animation and sound.</li>
+              <li><b>Story.</b> Nodes hand off to the cutscene engine and take control back when a scene ends.</li>
+              <li><b>Feedback.</b> Controller-first navigation, with a sound and a message when a node is still locked.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Also -->
+    <section id="also">
+      <div class="wrap">
+        <div class="section-title">Also on this project</div>
+        <h2>Localization, and the road to launch</h2>
+        <div class="timeline">
+          <div class="row"><div class="when">April – May 2025</div><span>Character selection and customization, from first screen to saved loadouts showing in gameplay.</span></div>
+          <div class="row"><div class="when">June 2025</div><span>Version 1.0 of the cutscene and dialogue engine, and the campaign map redesign with generated branches.</span></div>
+          <div class="row"><div class="when">July 2025</div><span>The game's localization system: a helper on every text element, all strings in one table, localized cutscene dialogue, and a debug key that cycles languages for testing.</span></div>
+          <div class="row"><div class="when">August – September 2025</div><span>The full campaign: all acts and their scenes, unlockables, purchases, and the console performance work on cutscenes.</span></div>
+          <div class="row"><div class="when">October 2025</div><span>Feedback rounds and polish ahead of the December release.</span></div>
+        </div>
+        <div class="back">
+          <a class="btn" href="../">Back to the portfolio</a>
+          <a class="btn secondary" href="https://www.gematsu.com/2025/10/synth-riders-overdrive-announced-for-switch" target="_blank" rel="noopener noreferrer">The game's announcement ↗</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div>© 2026 Angelo Gómez · Tecni Angelo LLC</div>
+      <div class="fine">Synth Riders is a trademark of Kluge Interactive. This page describes my own contribution to a released game.</div>
+    </div>
+  </footer>
+
+  <script>
+    // Unlisted YouTube video ids, one per system. A slot with an empty id is removed from the page.
+    const VIDEOS = { customization: "", cutscenes: "", campaign: "" };
+    for (const slot of document.querySelectorAll("[data-video]")) {
+      const id = VIDEOS[slot.dataset.video];
+      if (!id) { slot.remove(); continue; }
+      const frame = document.createElement("iframe");
+      frame.src = "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(id) + "?rel=0";
+      frame.title = slot.dataset.title;
+      frame.loading = "lazy";
+      frame.allow = "accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen";
+      frame.allowFullscreen = true;
+      slot.appendChild(frame);
+    }
+  </script>
+</body>
+</html>

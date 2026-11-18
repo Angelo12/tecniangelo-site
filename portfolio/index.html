@@ -116,6 +116,7 @@
     .links a { color: var(--white); border-bottom: 2px solid var(--gold); padding-bottom: 1px; }
     .links a:hover { color: var(--gold); }
     .links a::after { content: " \2197"; font-weight: 400; }
+    .links a.internal::after { content: " \2192"; }
 
     .status { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; }
     .status::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
@@ -185,7 +186,7 @@
       <a href="#top" class="brand"><span class="mono" aria-hidden="true">AG</span>Angelo Gómez</a>
       <nav class="nav-links" aria-label="Sections">
         <a href="#games">Games</a>
-        <a href="#ai">AI workflow</a>
+        <a href="#how">How I work</a>
         <a href="#studio">Studio</a>
         <a href="#skills">Skills</a>
         <a href="#contact" class="nav-cta">Contact</a>
@@ -210,7 +211,7 @@
         <div class="stats">
           <div class="stat"><b>10 years</b><span>shipping games, apps and web software</span></div>
           <div class="stat"><b>5 platforms</b><span>Meta Quest, PC VR, PlayStation VR2, Nintendo Switch, Apple Vision Pro</span></div>
-          <div class="stat"><b>93</b><span>achievements in the progression system I designed and built</span></div>
+          <div class="stat"><b>93</b><span>achievements in Level UP, the progression system I designed and built</span></div>
           <div class="stat"><b>2 stores</b><span>my own app, QueTasa, is live on the App Store and Google Play</span></div>
         </div>
       </div>
@@ -226,9 +227,9 @@
         <div class="cards">
           <article class="card wide">
             <div class="meta"><span class="role">Primary developer</span><span>2025 – 2026</span></div>
-            <h3>The Progression System</h3>
-            <p>Levels and XP, 93 achievements, daily and weekly missions with a claim flow, and the full in-game interface. The server is authoritative: I defined the contract between client and server and built the entire client, including an encrypted local cache and sign-in through Steam and Meta.</p>
-            <p>It shipped in March 2026 as the Level UP update, which the studio called its largest feature update to date.</p>
+            <h3>Level UP</h3>
+            <p>Synth Riders' player experience and progression system: levels and XP, 93 achievements, daily and weekly missions with a claim flow, and the full in-game interface. The server is authoritative: I defined the contract between client and server and built the entire client, including an encrypted local cache and sign-in through Steam and Meta.</p>
+            <p>It shipped in March 2026, and the studio called it its largest feature update to date.</p>
             <div class="chips"><span class="chip">Unity</span><span class="chip">C#</span><span class="chip">REST API</span><span class="chip">Steam and Meta sign-in</span><span class="chip">Quest · PC VR · PSVR2</span></div>
             <div class="links">
               <a href="https://www.uploadvr.com/synth-riders-levels-up-with-new-progression-system/" target="_blank" rel="noopener noreferrer">UploadVR coverage</a>
@@ -239,9 +240,10 @@
           <article class="card">
             <div class="meta"><span class="role">Owner of three systems</span><span>2025</span></div>
             <h3>Synth Riders for Nintendo Switch</h3>
-            <p>A standalone flatscreen game, released in December 2025. On a team of more than fifteen I built character customization (three characters, addressable assets, editor tooling, save and load), the cutscene and dialogue engine, and the procedural campaign map.</p>
+            <p>A standalone flatscreen game, released in December 2025. On a team of more than fifteen I built character customization (three characters, addressable assets, editor tooling, save and load), the cutscene and dialogue engine, and the campaign map.</p>
             <div class="chips"><span class="chip">Unity</span><span class="chip">C#</span><span class="chip">Addressables</span><span class="chip">Nintendo Switch</span></div>
             <div class="links">
+              <a class="internal" href="synth-riders-switch/">Read the case study</a>
               <a href="https://www.gematsu.com/2025/10/synth-riders-overdrive-announced-for-switch" target="_blank" rel="noopener noreferrer">Announcement on Gematsu</a>
             </div>
           </article>
@@ -297,15 +299,14 @@
       </div>
     </section>
 
-    <!-- AI workflow -->
-    <section id="ai">
+    <!-- How I work -->
+    <section id="how">
       <div class="wrap">
         <div class="callout">
-          <div class="section-title">A newer skill</div>
-          <h2>AI coding agents, adopted in 2025 and put to work</h2>
-          <p>Most of the work on this page predates AI coding agents: the arcade edition, the Vision Pro core, the interface overhaul and the Switch systems. I started using agents in late 2025, partway through building the progression system, and have spent the year since getting good at it.</p>
-          <p>I work with them in a disciplined way. I write the spec and the plan, direct the agents, review what they produce, and check the result myself in the editor and in the headset. Core logic gets its tests first, and a feature ends with tests that pin its behaviour. Building on automation tools my teammates had set up, I wrote the project's playbook for driving the editor with agents, added new scenarios to the menu-navigation test harness, and built my own verification probes and a test runner that works with the editor closed.</p>
-          <p>In 2026 that meant about twice the output of the year before, including features I owned from the database to the last polish pass on the interface.</p>
+          <div class="section-title">How I work</div>
+          <h2>Traditional practice and AI-assisted workflows</h2>
+          <p>I am comfortable and competent with both traditional software development practices and AI-assisted workflows, and I pick whichever suits the job.</p>
+          <p>Either way the discipline is the same. I start from a written spec and a plan, put tests first on core logic, review every change, and check the result myself on the device before I call it done.</p>
         </div>
       </div>
     </section>
