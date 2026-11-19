@@ -36,3 +36,16 @@ That's the whole switch — same files, professional URL.
 - Optional: move the privacy policy onto this domain so everything lives under one brand
   (currently at https://angelo12.github.io/quetasa-legal/ — keep that link working, or
   add a redirect, since it's already referenced in App Store Connect).
+
+## fogon/ — the Fogón POS product page
+A separate static page at `https://tecniangelo.com/fogon/` (Spanish): `fogon/index.html`,
+`fogon/styles.css`, `fogon/app.js` and `fogon/media/`. No build step.
+
+- The pictures and videos are copies from the product repo (`Angelo12/fogon-pos`, private),
+  folders `docs/demo` and `docs/demo/showcase`. After retaking them there, run
+  `python tools/site-media.py <this repo>/fogon docs/demo` from that repo.
+- Measured figures carry a `data-stat="..."` attribute, so each can be found and changed
+  everywhere it appears.
+- A video block hides itself while its file is missing, so the page never shows a broken player.
+- The page says what does not work yet (fiscal printers first of all). Keep that section true.
+- The home page links to it from its own "Fogón POS" section and the footer.
