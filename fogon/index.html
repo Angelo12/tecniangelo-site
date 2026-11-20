@@ -219,7 +219,7 @@
             <img src="media/11-cobrar-listo.png" width="1440" height="900" loading="lazy" alt="La cuenta cubierta, con el vuelto calculado, lista para facturar."></a>
           <div class="step-text"><h3>Factura</h3>
             <p>Con la cuenta cubierta se emite la factura, con el cliente por cédula o RIF si lo pide.</p>
-            <p class="note"><strong>Hoy, contra un simulador.</strong> La parte fiscal todavía no imprime en impresoras reales: los drivers están en desarrollo. <a href="#hoy">Ver dónde estamos</a>.</p></div>
+            <p class="note"><strong>Hoy, contra un simulador.</strong> La parte fiscal todavía no imprime en impresoras reales: el primer driver ya está escrito y falta probarlo en una. <a href="#hoy">Ver dónde estamos</a>.</p></div>
         </article>
         <article class="step" role="tabpanel" id="panel-7" aria-labelledby="paso-7">
           <a class="frame browser shot crop" href="media/14-caja.png"><span class="frame-bar" aria-hidden="true"><span></span><span></span><span></span></span>
@@ -804,7 +804,7 @@
 
     <div class="callout">
       <h3>Lo más importante: las impresoras fiscales todavía no</h3>
-      <p>Todo lo fiscal (factura, nota de crédito, reporte Z, recuperación tras un corte de luz) corre hoy contra un simulador. Los drivers para The Factory HKA, Bematech, Epson y BMC están en desarrollo. Hasta que exista el de tu impresora, tu restaurante no puede cambiarse por completo. Por eso esto es un acceso anticipado.</p>
+      <p>Todo lo fiscal (factura, nota de crédito, reporte Z, recuperación tras un corte de luz) corre hoy contra un simulador. El driver para las impresoras de The Factory HKA (HKA80, Bixolon SRP y el resto de esa familia) ya está escrito, a partir del manual del fabricante, pero todavía no ha impreso en una impresora real: es lo próximo que vamos a probar. Los de Bematech, Epson y BMC no existen todavía. Hasta que el de tu impresora esté probado, tu restaurante no puede cambiarse por completo. Por eso esto es un acceso anticipado.</p>
     </div>
 
     <div class="status">
@@ -831,14 +831,16 @@
           <li>Impresoras de cocina por red, por Windows o por puerto LPT/COM: falta probarlas con una impresora física</li>
           <li>Acceso remoto: corrido en pruebas, falta montarlo en internet de verdad</li>
           <li>Windows 10: es el mismo programa que en Windows 11, donde sí está probado</li>
+          <li>Driver para las impresoras fiscales de The Factory HKA: escrito, sin probar todavía en una impresora real</li>
+          <li>El programa principal en Windows 7, también de 32 bits: construido y revisado, falta correrlo en una PC con Windows 7</li>
           <li>Estaciones con Windows 7 por el navegador: escrito para eso, sin probar en una</li>
         </ul>
       </div>
       <div class="status-col no">
         <h3>En desarrollo o pendiente</h3>
         <ul>
-          <li><strong>Impresoras fiscales reales</strong></li>
-          <li>El programa principal en Windows 7</li>
+          <li><strong>Una factura impresa en una impresora fiscal real</strong></li>
+          <li>Drivers para impresoras Bematech, Epson y BMC</li>
           <li>Traer los datos de tu sistema actual</li>
           <li>Combos, varias cajas, ventas a crédito y reporte X</li>
           <li>Cifrado dentro de la red del local</li>
@@ -864,9 +866,9 @@
         <p>Los datos se guardan en disco a medida que ocurren. Si el corte agarra una factura a medias, al volver el sistema lo resuelve antes de aceptar trabajo nuevo: le pregunta a la impresora por su contador y así sabe si la factura salió o no, de modo que nunca la imprime dos veces. Mientras una factura esté en duda, no se envía otra.</p>
         <p>Esto está probado contra el simulador de impresora fiscal, todavía no con una impresora real.</p></details>
       <details><summary>¿Sirve con mi impresora fiscal?</summary>
-        <p>Todavía no. Hoy la factura, la nota de crédito y el reporte Z corren contra un simulador. Los drivers para The Factory HKA, Bematech, Epson y BMC están en desarrollo. Cuéntanos qué impresora tienes: eso decide cuál hacemos primero.</p></details>
+        <p>Todavía no. Hoy la factura, la nota de crédito y el reporte Z corren contra un simulador. El driver para las impresoras de The Factory HKA (HKA80, Bixolon SRP y el resto de esa familia) ya está escrito y falta probarlo en una impresora real. Los de Bematech, Epson y BMC no existen todavía. Cuéntanos qué impresora tienes: eso decide cuál sigue.</p></details>
       <details><summary>¿Puedo usar las computadoras e impresoras de cocina que ya tengo?</summary>
-        <p>Esa es la idea. La computadora principal necesita Windows 10 u 11 (está probado en Windows 11). Las demás solo necesitan un navegador: una PC vieja con Windows 7, una tablet o un teléfono sirven de estación. Las pantallas están hechas para monitores de 1024 × 768 y de 800 × 600.</p>
+        <p>Esa es la idea. La computadora principal está probada en Windows 11. Para las más viejas hay una versión para Windows 7, también de 32 bits, que ya está construida y revisada y que falta correr en una PC real con Windows 7. Las demás solo necesitan un navegador: una PC vieja con Windows 7, una tablet o un teléfono sirven de estación. Las pantallas están hechas para monitores de 1024 × 768 y de 800 × 600.</p>
         <p>Para la cocina puedes usar una pantalla, o impresoras de tickets conectadas por red, instaladas en Windows o por puerto LPT/COM. Esa parte está construida y falta probarla con una impresora física.</p></details>
       <details><summary>¿Cómo sé que un empleado no borra una venta o se queda con un descuento?</summary>
         <p>Una factura no se puede borrar: solo se reversa con una nota de crédito, que pide un motivo y que un mesonero no puede hacer. Lo que se anula después de enviarse a cocina sigue en la cuenta, marcado.</p>
